@@ -1,6 +1,5 @@
 # Activity: Street or Road 
 
-
 ## Instructions
 
 - Read the rubric carefully. There are questions in this activity that are not in the text book. 
@@ -15,7 +14,6 @@ The assignment is worth a total of 15 points.
 
 Turn in your RMarkdown and R Notebook in Canvas before the due date.
 
-
 Solved Example: 
 
 - [1 points] Work through the "Solved Example" section using `sample(50)` the voter addresses dataset as shown in the eBook, showing progress with each step.
@@ -23,7 +21,7 @@ Solved Example:
 - [1 point] Additional Question: How many addresses are a PO BOX (including NCSU BOX)
 
 "Back to the Streets" Section:
--  [2 points] Part 1: Explain each line of code in English (either narrative or commented code).
+- [2 points] Part 1: Explain each line of code in English (either narrative or commented code).
 - [3 points] Implement your method on the entire `Addresses` data set. Explain how your code works line by line.
 - [2 points] Part 2: Implement your method on the COMBINED address dataset : expand to match several more patterns (at least 12 total).
 - [2 points] Additional Question 1: Present your result from part 2 by providing a table in descending order of popularity for the street name endings you found

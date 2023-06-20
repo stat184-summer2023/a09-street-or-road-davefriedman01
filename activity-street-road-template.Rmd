@@ -1,19 +1,23 @@
 ---
-title: "Activity: Street or Road?"
-author: "YOUR NAME HERE"
+title:  "Activity: Street or Road?"
+author: "Dave Friedman"
+date:   "20 Jun 2023"
 output: html_notebook
 ---
 
 ## Load in the data
 
 ```{r}
-#load libraries 
+library(lubridate)
+library(rvest)
+library(tidyverse)
 
-#load in the data here 
-# we will only be using the "street-addresses.csv" file from the text
+str_c('EXECUTED : ', now())
+sessionInfo()
 
-
-
+# about 15,000 street addresses of registered voters in Wake County, NC
+Addresses <- read_csv('https://mdbeckman.github.io/dcSupplement/data/street-addresses.csv')
+head(Addresses)
 ```
 
 ## Recreate Solved Example using `sample(50)`
@@ -38,7 +42,6 @@ output: html_notebook
 ```
 
 My answer here...... 
-
 
 ## Back to the Streets: Your Turn
 
