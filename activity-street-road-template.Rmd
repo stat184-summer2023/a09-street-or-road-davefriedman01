@@ -23,15 +23,74 @@ head(Addresses)
 ## Recreate Solved Example using `sample(50)`
 
 ```{r}
+Sample <-
+  Addresses %>%
+    sample_n(size = 50)
+head(Sample)
 
+pattern <- 'PO'
 
+Matches <-
+  Sample %>%
+    filter(grepl(pattern = pattern, address))
+head(Matches)
+
+Dont <-
+  Sample %>%
+    filter(!grepl(pattern = 'PO', address))
+head(Dont)
+
+pattern <- 'BOX\\s+(\\d+)'
+
+Matches <-
+  Sample %>%
+    filter( grepl(pattern, address))
+head(Matches)
+
+Dont <-
+  Sample %>%
+    filter(!grepl(pattern, address))
+head(Dont)
+
+BoxNumbers <-
+  Sample %>%
+    filter(grepl(pattern, address)) %>%
+    tidyr::extract(address, into = 'boxnum', regex = pattern)
+head(BoxNumbers)
 ```
 
 ## Recreate Soved Example using the entire `Address` data set
 
 ```{r}
+pattern <- 'PO'
 
+Matches <-
+  Addresses %>%
+    filter(grepl(pattern = pattern, address))
+head(Matches)
 
+Dont <-
+  Addresses %>%
+    filter(!grepl(pattern = 'PO', address))
+head(Dont)
+
+pattern <- 'BOX\\s+(\\d+)'
+
+Matches <-
+  Addresses %>%
+    filter( grepl(pattern, address))
+head(Matches)
+
+Dont <-
+  Addresses %>%
+    filter(!grepl(pattern, address))
+head(Dont)
+
+BoxNumbers <-
+  Addresses %>%
+    filter(grepl(pattern, address)) %>%
+    tidyr::extract(address, into = 'boxnum', regex = pattern)
+head(BoxNumbers)
 ```
 
 #### Additional Question: How many addresses are a PO BOX (including NCSU BOX)? 
