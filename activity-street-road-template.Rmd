@@ -95,38 +95,58 @@ head(BoxNumbers)
 
 #### Additional Question: How many addresses are a PO BOX (including NCSU BOX)? 
 
+$11,100$ addresses are a PO BOX (including NCSU BOX).
+
 ```{r}
-
-
+Addresses %>%
+  filter(grepl(pattern, address))
 ```
-
-My answer here...... 
 
 ## Back to the Streets: Your Turn
 
 #### Part 1: Explain (in english) each line of the following code chunk
 
 ```{r}
-pattern <- "(ST|RD|ROAD)"
-LeftOvers <-
-  Addresses %>% 
-  filter( !grepl(pattern, address),
-          !grepl("\\sAPT|UNIT\\s[\\d]+$", address),
-          !grepl(" BOX ", address)
-          )
-```
+pattern <- '(ST|RD|ROAD)'
 
-My answer here.......
+LeftOvers <-
+  Addresses %>%
+    filter(
+      !grepl(pattern, address),                 # matches other than: 'ST' or 'RD' or 'ROAD'
+      !grepl('\\sAPT|UNIT\\s[\\d]+$', address), # matches other than: (1 whitespace, 'APT') or ('UNIT', 1 whitespace, 1 or more digits at the end of the string)
+      !grepl(' BOX ', address)                  # matches other than: 1 space, 'BOX', 1 space
+    )
+```
 
 #### Part 2: Implement your method on the entire `Addresses` data set. Explain how your code works line by line.
 
 ```{r}
-
-
-
+Addresses %>%
+  filter(
+    !grepl(pattern = ' AVENUE |AVENUE$', x = address),       # matches other than: 'AVENUE' flanked by whitespace anywhere in the string, or 'AVENUE' at the end of the string
+    !grepl(pattern = ' AVE |AVE$', x = address),             # matches other than: 'AVE' flanked by whitespace anywhere in the string, or 'AVE' at the end of the string
+    !grepl(pattern = ' BLVD |BLVD$', x = address),           # matches other than: 'BLVD' flanked by whitespace anywhere in the string, or 'BLVD' at the end of the string
+    !grepl(pattern = ' BOULEVARD |BOULEVARD$', x = address), # matches other than: 'BOULEVARD' flanked by whitespace anywhere in the string, or 'BOULEVARD' at the end of the string
+    !grepl(pattern = ' CIR |CIR$', x = address),             # matches other than: 'CIR' flanked by whitespace anywhere in the string, or 'CIR' at the end of the string
+    !grepl(pattern = ' CIRCLE |CIRCLE$', x = address),       # matches other than: 'CIRCLE' flanked by whitespace anywhere in the string, or 'CIRCLE' at the end of the string
+    !grepl(pattern = ' CT |CT$', x = address),               # matches other than: 'CT' flanked by whitespace anywhere in the string, or 'CT' at the end of the string
+    !grepl(pattern = ' COURT |COURT$', x = address),         # matches other than: 'COURT' flanked by whitespace anywhere in the string, or 'COURT' at the end of the string
+    !grepl(pattern = ' DR |DR$', x = address),               # matches other than: 'DR' flanked by whitespace anywhere in the string, or 'DR' at the end of the string
+    !grepl(pattern = ' DRIVE |DRIVE$', x = address),         # matches other than: 'DRIVE' flanked by whitespace anywhere in the string, or 'DRIVE' at the end of the string
+    !grepl(pattern = ' LN |LN$', x = address),               # matches other than: 'LN' flanked by whitespace anywhere in the string, or 'LN' at the end of the string
+    !grepl(pattern = ' LANE |LANE$', x = address),           # matches other than: 'LANE' flanked by whitespace anywhere in the string, or 'LANE' at the end of the string
+    !grepl(pattern = ' PL |PL$', x = address),               # matches other than: 'PL' flanked by whitespace anywhere in the string, or 'PL' at the end of the string
+    !grepl(pattern = ' PLACE |PLACE$', x = address),         # matches other than: 'PLACE' flanked by whitespace anywhere in the string, or 'PLACE' at the end of the string
+    !grepl(pattern = ' RD |RD$', x = address),               # matches other than: 'RD' flanked by whitespace anywhere in the string, or 'RD' at the end of the string
+    !grepl(pattern = ' ROAD |ROAD$', x = address),           # matches other than: 'ROAD' flanked by whitespace anywhere in the string, or 'ROAD' at the end of the string
+    !grepl(pattern = ' ST |ST$', x = address),               # matches other than: 'ST' flanked by whitespace anywhere in the string, or 'ST' at the end of the string
+    !grepl(pattern = ' STREET |STREET$', x = address),       # matches other than: 'STREET' flanked by whitespace anywhere in the string, or 'STREET' at the end of the string
+    !grepl(pattern = ' TRAIL |TRAIL$', x = address),         # matches other than: 'TRAIL' flanked by whitespace anywhere in the string, or 'TRAIL' at the end of the string
+    !grepl(pattern = ' WAY |WAY$', x = address),             # matches other than: 'WAY' flanked by whitespace anywhere in the string, or 'WAY' at the end of the string
+    !grepl(pattern = ' WINERY |WINERY$', x = address),       # matches other than: 'WINERY' flanked by whitespace anywhere in the string, or 'WINERY' at the end of the string
+    !grepl(pattern = 'BOX\\s+(\\d+)', x = address)           # filters out all the 'BOX' from above
+  )
 ```
-
-My answer here.......
 
 #### Additional Question 1: Present your result from part 2 by providing a table in descending order of popularity for the street name endings you found
 
