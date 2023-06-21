@@ -151,8 +151,39 @@ Addresses %>%
 #### Additional Question 1: Present your result from part 2 by providing a table in descending order of popularity for the street name endings you found
 
 ```{r}
+pattern <- '\\s+('
+pattern <- str_c(pattern, 'AVE|AVENUE')
+pattern <- str_c(pattern, '|BLVD|BOULEVARD')
+pattern <- str_c(pattern, '|CIR|CIRCLE')
+pattern <- str_c(pattern, '|CT|COURT')
+pattern <- str_c(pattern, '|DR|DRIVE')
+pattern <- str_c(pattern, '|LN|LANE')
+pattern <- str_c(pattern, '|PL|PLACE')
+pattern <- str_c(pattern, '|RD|ROAD')
+pattern <- str_c(pattern, '|ST|STREET')
+pattern <- str_c(pattern, '|TRAIL')
+pattern <- str_c(pattern, '|WAY')
+pattern <- str_c(pattern, '|WINERY')
+pattern <- str_c(pattern, ')(\\s+|$)?')
+pattern
 
-
+streets <-
+  Addresses %>%
+    filter(
+      grepl(x = address, pattern = pattern, ignore.case = TRUE)
+    ) %>%
+    tidyr::extract(
+      col   = address,
+      regex = pattern,
+      into  = c(
+        'street',
+        ' '
+      )
+    ) %>%
+    group_by(street) %>%
+    summarize(total = n()) %>%
+    arrange(desc(total))
+streets
 ```
 
 #### Additional Question 2: Present your result by using ggplot to a bar chart in descending order of popularity for the street name endings you found previously.
@@ -160,9 +191,12 @@ Addresses %>%
 Note: make sure your order street names according to popularity, not alphabetically.
 
 ```{r}
-
+streets %>%
+  ggplot(aes(x = reorder(street, -total), y = total)) +
+    geom_col() +
+    xlab('street')
 ```
 
 #### Additional Question 3: Comment on any patterns you see
 
-My answer here.......
+'DR', 'RD', and 'ST' are the most common street types. In general, abbrviated street types are more common than their longform counterparts.
